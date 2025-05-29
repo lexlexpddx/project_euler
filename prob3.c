@@ -25,11 +25,34 @@ int find_largest_factor()
         return 2;
 }
 
+
+long long large_factor_rec(long long num, int factor)
+{
+
+    if (factor >= sqrt(num))
+        return num;
+    
+    
+    if (num % factor == 0)
+    {
+        num = num / factor;
+        if (num == 1)
+            return factor;
+        return large_factor_rec(num, factor + 1);
+    }
+    
+    return large_factor_rec(num, factor + 1);
+}
+
 int main()
 {
+    long long number = NUM;
     int result = find_largest_factor();
 
-    printf("largest factor: %d", result);
+    //printf("largest factor: %d", result);
+
+    long long new_result = large_factor_rec(number, 2);
+    printf("rec fact: %lld\n", new_result);
 
     return 0;
 }
